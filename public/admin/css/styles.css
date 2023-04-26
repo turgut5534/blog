@@ -1,0 +1,13 @@
+.delete-file {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }

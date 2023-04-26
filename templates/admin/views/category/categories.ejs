@@ -1,0 +1,27 @@
+<%- include('../../partials/head' , { title: 'Categories' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Categories
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                +Add
+                              </button>
+                        </div>
+                    </div>
+
+                    <div class="row categories">
+  
+                    </div>
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>
