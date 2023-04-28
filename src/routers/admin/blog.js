@@ -126,4 +126,34 @@ router.post('/update', auth, upload.single('image'), async(req,res) => {
 
 })
 
+router.post('/status', async(req,res) => {
+
+    try {
+
+        const blog = await Post.findByPk(req.body.id)
+        let text;
+
+        if(blog.is_active == 0) {
+
+            blog.is_active = 1
+            text= 'Make Passive'
+
+        } else {
+
+            blog.is_active = 0
+            text = 'Make Active'
+            
+        }
+
+        await blog.save()
+
+        res.status(200).json({text})
+
+    } catch(e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+
+})
+
 module.exports = router

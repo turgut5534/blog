@@ -27,6 +27,11 @@
                                             <%= blog.title %>
                                         </h5>
                                         <div class="d-flex justify-content-end">
+                                            
+                                            <a href="javascript:;"
+                                                data-id="<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-secondary me-2 status-<%= blog.id%> change-blog-status"
+                                                ><%= blog.is_active == 0 ? 'Make Active' : 'Make Passive' %></a>
                                             <a href="/admin/blog/edit/<%= blog.id %>"
                                                 class="btn btn-sm btn-outline-secondary me-2"
                                                 >Edit</a>

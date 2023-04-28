@@ -281,3 +281,33 @@ $('body').on('submit','#category-save-form', function(e) {
     })
     
 })
+
+$('body').on('click','.change-blog-status', function(e) {
+
+    e.preventDefault()
+
+    const id = $(this).data('id')
+
+    $.ajax({
+        type: 'POST',
+        url: '/admin/blog/status',
+        data: {id},
+        success: function(data) {
+
+            $('.status-'+id).html(data.text)
+
+            iziToast.success({
+                title: 'OK',
+                message: 'Status succcessfully changed!',
+            })
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'An error occured changing the status',
+            })
+        }
+    })
+    
+})
