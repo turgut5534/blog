@@ -4048,4 +4048,7 @@
     margin-top: 6rem;
   }
   
-  /*# sourceMappingURL=main.css.map */
+  .blog-content-image {
+    max-height: 500px;
+    object-fit: contain;
+  }

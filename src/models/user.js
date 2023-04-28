@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db/mysql')
 const Post = require('./post')
+const Category = require('./category')
 
 const User = sequelize.define('user', {
     name: {

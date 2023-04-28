@@ -1,0 +1,89 @@
+<%- include('../../partials/head' , { title: 'Edit Blog' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <!-- <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Edit Blog
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="mb-3 blog-title">
+                        <h2 class="text-center">Blog Title: <%= blog.title %></h2>
+                        <img class="blog-cover-image" src="/blogs/<%= blog.image %>" alt="">
+                    </div>
+
+                    <!-- <h2 class="text-center mt-5">Content</h2> -->
+
+                    <% blog.contents.forEach((content, index) => { %>
+                    <div class="mb-3 blog-edit-content-div">
+                        <p class="h2 text-center"><%= index+1 %></p>
+                        <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
+                        <textarea class="blog-content" name="" id="" cols="30" rows="10"><%= content.content %></textarea>
+                    </div>
+                    <% }) %>
+
+                    <form action="/admin/blog/update" method="POST" class="blog-form" enctype="multipart/form-data">
+
+                        <input type="hidden" name="id" value="<%= blog.id %>">
+
+                        <% if(categories.length) { %>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Categories:</label>
+                                <div class="row">
+                                    <% categories.forEach((c)=> { %>
+                                        <div class="col-12 col-md-4 col-lg-3">
+                                            <input value="<%= c.id %>" name="categories" id="<%= c.id %>"
+                                                type="checkbox">
+                                            <label style="text-transform: capitalize" for="<%= c.id %>">
+                                                <%= c.name %>
+                                            </label>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                        <% } %>
+
+                        <p class="h2 text-center mt-5">New Content</p>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image:</label>
+                            <input type="file" id="image" name="image" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Content</label>
+                            <textarea class="blog-content" name="content" id="" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update Blog</button>
+                        
+                    </form>
+
+                </div>
+            </main>
+
+            <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+            <script>
+                // Select all textareas with class name "blog-content"
+                const textareas = document.querySelectorAll('.blog-content');
+
+                // Loop through each textarea and initialize it as a ClassicEditor instance
+                textareas.forEach(textarea => {
+                    ClassicEditor.create(textarea)
+                        .then(editor => {
+                            console.log(editor);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                });
+            </script>
+            
+
+            <%- include('../../partials/footer') %>

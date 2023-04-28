@@ -4,13 +4,28 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 require('dotenv').config();
 const auth = require('../middlewares/auth')
+const sanitizeHtml = require('sanitize-html');
 
 const User = require('../models/user')
+const Post = require('../models/post');
+const PostContent = require('../models/postContent');
+const Comment = require('../models/comment');
+const Category = require('../models/category');
+const variable = require('../middlewares/variables')
+
+router.use(variable)
 
 router.get('/', async(req,res) => {
     
     try {
-        res.render('site/views/index')
+        
+        const blogs = await Post.findAll({
+            where: {
+                is_active : 1
+            }
+        })
+
+        res.render('site/views/index', {blogs})
     } catch(e) {
         console.log(e)
     }
@@ -77,8 +92,46 @@ router.get('/blogs/:slug', async(req,res) => {
     
     try {
 
-        res.render('site/views/detail')
+        const blog = await Post.findOne({
+            where: {
+              slug: req.params.slug
+            },
+            include: [
+              {
+                model: User
+              },
+              {
+                model: PostContent,
+                as: 'contents'
+              },
+              {
+                model: Comment,
+                as: 'comments'
+              }
+            ]
+          });
+          
+        const categories = await Category.findAll()
 
+        res.render('site/views/detail', {blog, categories })
+
+    } catch(e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/category/:slug', async(req,res) => {
+
+    try {
+
+        const category = await Category.findOne({
+            where: {
+                slug: req.params.slug
+            }
+        })
+
+        res.render('site/views/about', {category})
     } catch(e) {
         console.log(e)
     }

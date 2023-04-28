@@ -1,0 +1,46 @@
+<%- include('../../partials/head' , { title: 'Blogs' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Blogs
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a href="/admin/blog/add" class="btn btn-success">
+                                +Add
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row categories">
+                        <% blogs.forEach((blog)=> { %>
+                            <div class="col-12 col-md-6 col-lg-4 blog-<%= blog.id %>">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="capitalize card-title blog-name-h5-<%= blog.id %>">
+                                            <%= blog.title %>
+                                        </h5>
+                                        <div class="d-flex justify-content-end">
+                                            <a href="/admin/blog/edit/<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-secondary me-2"
+                                                >Edit</a>
+                                            <a href="javascript:;" data-data="blog"
+                                                data-href="/admin/blog/delete/<%= blog.id %>"
+                                                data-title="<%= blog.name %>" data-id="<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('../../partials/footer') %>

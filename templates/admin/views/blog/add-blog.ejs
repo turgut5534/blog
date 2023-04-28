@@ -1,0 +1,50 @@
+<%- include('../../partials/head' , { title: 'Add Blog' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Add Blog
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/admin/blog/save" method="POST" class="blog-form" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image:</label>
+                            <input type="file" id="image" name="image" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" id="title" name="title" class="form-control" required>
+                        </div>
+
+                        <% if(categories.length) { %>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Categories:</label>
+                                <div class="row">
+                                    <% categories.forEach((c)=> { %>
+                                        <div class="col-12 col-md-4 col-lg-3">
+                                            <input value="<%= c.id %>" name="categories" id="<%= c.id %>"
+                                                type="checkbox">
+                                            <label style="text-transform: capitalize" for="<%= c.id %>">
+                                                <%= c.name %>
+                                            </label>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                            <% } %>
+
+                                <button type="submit" class="btn btn-primary">Add project</button>
+                    </form>
+
+                </div>
+            </main>
+
+            <%- include('../../partials/footer') %>

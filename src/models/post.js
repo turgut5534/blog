@@ -16,8 +16,20 @@ const Post = sequelize.define('post', {
     },
     image : {
         type: Sequelize.STRING
+    },
+    is_active: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
     }
   });
+
+  // sequelize.getQueryInterface().addColumn('posts', 'is_active', {
+  //   type: Sequelize.BOOLEAN,
+  //   defaultValue: true,
+  //   allowNull: false,
+  //   after: 'image'
+  // });
+  
 
 Post.hasMany(PostContent, { as: 'contents', foreignKey: 'postId'})
 Post.hasMany(Comment, { as: 'comments', foreignKey: 'postId'})

@@ -6,6 +6,8 @@ const port = process.env.PORT || 3000
 
 const publicDirectory = path.join(__dirname, '../public')
 const viewsDirectory = path.join(__dirname, '../templates')
+const uploadDirectory = path.join(__dirname, '../uploads')
+
 const blogRouter = require('./routers/blogRouter')
 const adminRouter = require('./routers/adminRouter')
 
@@ -18,6 +20,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(express.static(publicDirectory))
+app.use(express.static(uploadDirectory))
 app.use(blogRouter)
 app.use('/admin', adminRouter)
 
