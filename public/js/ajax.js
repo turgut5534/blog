@@ -69,7 +69,14 @@ $('#comment-form').on('submit', function(e) {
             </div>
         </li>`)
 
+        $('#comment-form')[0].reset()
+
         $('.comment-count').html(data.count+ ' Comments')
+
+        iziToast.success({
+            title: 'Success',
+            message: 'Thank you for your comment!',
+        });
 
         },
         error: function(e) {

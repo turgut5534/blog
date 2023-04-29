@@ -6,7 +6,7 @@
 
         <% cachedPosts.forEach((post) => {%>
         <article class="col-block popular__post">
-          <a href="#0" class="popular__thumb">
+          <a href="/blogs/<%= post.slug %>" class="popular__thumb">
             <img src="/blogs/<%= post.image %>" alt="">
           </a>
           <h5><%= post.title %></h5>
@@ -112,6 +112,7 @@
   </div>
 </footer>
 
+<script src="/js/iziToast.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="/js/plugins.js"></script>
 <script src="/js/main.js"></script>
