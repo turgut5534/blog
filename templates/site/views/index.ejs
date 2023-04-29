@@ -5,10 +5,11 @@
             <div class="row">
                 <div class="col-full">
                     <div class="featured-slider featured" data-aos="zoom-in">
+                        <% blogs.forEach((blog)=> { %>
                         <div class="featured__slide">
                             <div class="entry">
                                 <div class="entry__background"
-                                    style="background-image:url('images/thumbs/featured/featured-guitarman.jpg');">
+                                    style="background-image:url('/blogs/<%= blog.image %>');">
                                 </div>
                                 <div class="entry__content">
                                     <span class="entry__category"><a href="#0">Music</a></span>
@@ -16,7 +17,7 @@
                                             Personality.</a></h1>
                                     <div class="entry__info">
                                         <a href="#0" class="entry__profile-pic">
-                                            <img class="avatar" src="images/avatars/user-05.jpg" alt="">
+                                            <img class="avatar" src="/users/<%= blog.image %>" alt="">
                                         </a>
                                         <ul class="entry__meta">
                                             <li><a href="#0">Jonathan Smith</a></li>
@@ -26,6 +27,8 @@
                                 </div>
                             </div>
                         </div>
+                        <% }) %>
+
                         <div class="featured__slide">
                             <div class="entry">
                                 <div class="entry__background"
@@ -45,26 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="featured__slide">
-                            <div class="entry">
-                                <div class="entry__background"
-                                    style="background-image:url('images/thumbs/featured/featured-beetle.jpg');"></div>
-                                <div class="entry__content">
-                                    <span class="entry__category"><a href="#0">LifeStyle</a></span>
-                                    <h1><a href="#0" title="">The difference between Classics, Vintage & Antique
-                                            Cars.</a></h1>
-                                    <div class="entry__info">
-                                        <a href="#0" class="entry__profile-pic">
-                                            <img class="avatar" src="images/avatars/user-03.jpg" alt="">
-                                        </a>
-                                        <ul class="entry__meta">
-                                            <li><a href="#0">John Doe</a></li>
-                                            <li>June 12, 2018</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -74,28 +58,32 @@
             <div class="row entries-wrap wide">
                 <div class="entries">
 
-                    <% blogs.forEach((blog) => { %>
-                    <article class="col-block">
-                        <div class="item-entry" data-aos="zoom-in">
-                            <div class="item-entry__thumb">
-                                <a href="/blogs/<%= blog.slug %>" class="item-entry__thumb-link">
-                                    <img src="/blogs/<%= blog.image %>"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="item-entry__text">
-                                <div class="item-entry__cat">
-                                    <a href="category.html">Design</a>
+                    <% blogs.forEach((blog)=> { %>
+                        <article class="col-block">
+                            <div class="item-entry" data-aos="zoom-in">
+                                <div class="item-entry__thumb">
+                                    <a href="/blogs/<%= blog.slug %>" class="item-entry__thumb-link">
+                                        <img src="/blogs/<%= blog.image %>" alt="">
+                                    </a>
                                 </div>
-                                <h1 class="item-entry__title"><a href="single-standard.html"><%= blog.title %></a></h1>
-                                <div class="item-entry__date">
-                                    <a href="single-standard.html"><%= blog.createdAt.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></a>
+                                <div class="item-entry__text">
+                                    <div class="item-entry__cat">
+                                        <a href="category.html">Design</a>
+                                    </div>
+                                    <h1 class="item-entry__title"><a href="single-standard.html">
+                                            <%= blog.title %>
+                                        </a></h1>
+                                    <div class="item-entry__date">
+                                        <a href="single-standard.html">
+                                            <%= blog.createdAt.toLocaleDateString('en-US', { day: 'numeric' ,
+                                                month: 'long' , year: 'numeric' }) %>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
-                    <% } ) %>
-        
+                        </article>
+                        <% } ) %>
+
                 </div>
             </div>
             <div class="row pagination-wrap">
@@ -113,108 +101,6 @@
                             <li><a class="pgn__next" href="#0">Next</a></li>
                         </ul>
                     </nav>
-                </div>
-            </div>
-        </section>
-
-        <section class="s-extra">
-            <div class="row">
-                <div class="col-seven md-six tab-full popular">
-                    <h3>Popular Posts</h3>
-                    <div class="block-1-2 block-m-full popular__posts">
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/tulips-150.jpg" alt="">
-                            </a>
-                            <h5>10 Interesting Facts About Caffeine.</h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-14">Jun 14,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/wheel-150.jpg" alt="">
-                            </a>
-                            <h5><a href="#0">Visiting Theme Parks Improves Your Health.</a></h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/shutterbug-150.jpg" alt="">
-                            </a>
-                            <h5><a href="#0">Key Benefits Of Family Photography.</a></h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/cookies-150.jpg" alt="">
-                            </a>
-                            <h5><a href="#0">Absolutely No Sugar Oatmeal Cookies.</a></h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/beetle-150.jpg" alt="">
-                            </a>
-                            <h5><a href="#0">Throwback To The Good Old Days.</a></h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0">John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                        <article class="col-block popular__post">
-                            <a href="#0" class="popular__thumb">
-                                <img src="images/thumbs/small/salad-150.jpg" alt="">
-                            </a>
-                            <h5>Healthy Mediterranean Salad Recipes</h5>
-                            <section class="popular__meta">
-                                <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                                <span class="popular__date"><span>on</span> <time datetime="2018-06-12">Jun 12,
-                                        2018</time></span>
-                            </section>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-four md-six tab-full end">
-                    <div class="row">
-                        <div class="col-six md-six mob-full categories">
-                            <h3>Categories</h3>
-                            <ul class="linklist">
-                                <li><a href="#0">Lifestyle</a></li>
-                                <li><a href="#0">Travel</a></li>
-                                <li><a href="#0">Recipes</a></li>
-                                <li><a href="#0">Management</a></li>
-                                <li><a href="#0">Health</a></li>
-                                <li><a href="#0">Creativity</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-six md-six mob-full sitelinks">
-                            <h3>Site Links</h3>
-                            <ul class="linklist">
-                                <li><a href="#0">Home</a></li>
-                                <li><a href="#0">Blog</a></li>
-                                <li><a href="#0">Styles</a></li>
-                                <li><a href="#0">About</a></li>
-                                <li><a href="#0">Contact</a></li>
-                                <li><a href="#0">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
