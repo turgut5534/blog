@@ -24,6 +24,10 @@ app.use(express.static(uploadDirectory))
 app.use(blogRouter)
 app.use('/admin', adminRouter)
 
+app.get('*', (req,res) => {
+    res.render('site/views/404')
+})
+
 app.listen(port, () => {
     console.log(`Server is up on ${port}`)
 })

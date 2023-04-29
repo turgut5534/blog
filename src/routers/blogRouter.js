@@ -142,7 +142,7 @@ router.get('/blogs/:slug', async(req,res) => {
         const categories = await Category.findAll()
 
         if(!blog) {
-            return res.send('Blog not found')
+            res.render('site/views/404')
         }
 
         let nextPost = await Post.findOne({
@@ -275,7 +275,11 @@ router.post('/comment', async(req,res) => {
 
         await comment.save()
 
-        const count = await Comment.count()
+        const count = await Comment.count({
+            where: {
+                postId: req.body.postId
+            }
+        })
 
         res.status(201).json({comment, count})
 

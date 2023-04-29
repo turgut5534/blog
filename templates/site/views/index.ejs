@@ -1,4 +1,4 @@
-<%- include('../partials/head' , { title: 'Homepage' }) %>
+<%- include('../partials/head' , { title: 'Blogs' }) %>
     <%- include('../partials/header') %>
 
         <section class="s-featured">
@@ -12,7 +12,7 @@
                                     style="background-image:url('/blogs/<%= blog.image %>');">
                                 </div>
                                 <div class="entry__content">
-                                    <span class="entry__category"><a href="/blogs/<%= blog.slug %>"></a></span>
+                                    <span class="entry__category"><a href="/blogs/<%= blog.slug %>"><%= blog.post_categories.map(c => c.category.name).join(',') %></a></span>
                                     <h1><a href="/blogs/<%= blog.slug %>" title=""><%= blog.title %></a></h1>
                                     <div class="entry__info">
                                         <a href="/blogs/<%= blog.slug %>" class="entry__profile-pic">
@@ -48,9 +48,11 @@
                                 </div>
                                 <div class="item-entry__text">
                                     <div class="item-entry__cat">
-                                        <a href="category.html">Design</a>
+                                        <% blog.post_categories.forEach((category) => { %>
+                                            <a href="/category/<%= category.category.slug %>"><%= category.category.name %></a>
+                                        <% }) %>
                                     </div>
-                                    <h1 class="item-entry__title"><a href="single-standard.html">
+                                    <h1 class="item-entry__title"><a href="/blogs/<%= blog.slug %>">
                                             <%= blog.title %>
                                         </a></h1>
                                     <div class="item-entry__date">

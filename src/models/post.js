@@ -32,7 +32,7 @@ const Post = sequelize.define('post', {
   
 
 Post.hasMany(PostContent, { as: 'contents', foreignKey: 'postId'})
-Post.hasMany(Comment, { as: 'comments', foreignKey: 'postId'})
+Post.hasMany(Comment, { as: 'comments', foreignKey: 'postId', onDelete: 'CASCADE'})
 Post.hasMany(PostCategory)
 
 PostContent.belongsTo(Post, { foreignKey: 'postId'})  
