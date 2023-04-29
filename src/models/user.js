@@ -21,6 +21,9 @@ const User = sequelize.define('user', {
     },
     about: {
       type: Sequelize.TEXT
+    },
+    website: {
+      type: Sequelize.STRING
     }
   });
 

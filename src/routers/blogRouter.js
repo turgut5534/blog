@@ -237,9 +237,18 @@ router.get('/category/:slug', async(req,res) => {
 
 })
 
-router.get('/about', (req,res) => {
+router.get('/about', async(req,res) => {
 
-    res.render('site/views/about')
+    try {
+        
+        const users = await User.findAll()
+
+        res.render('site/views/about', {users})
+    } catch(e) {
+        console.log(e)
+    }
+
+    
 
 })
 

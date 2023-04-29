@@ -6,9 +6,12 @@
                 <div class="col-full s-content__header">
                     <h1 class="display-1 display-1--with-line-sep">About Us. </h1>
                     <p class="lead">
-                        Welcome to our blog! We're a team of passionate travelers and software enthusiasts who love to share our experiences and insights with others. Follow along with us as we explore new destinations and discover innovative technologies. Thanks for stopping by!"</p>
+                        Welcome to our blog! We're a team of passionate travelers and software enthusiasts who love to
+                        share our experiences and insights with others. Follow along with us as we explore new
+                        destinations and discover innovative technologies. Thanks for stopping by!"</p>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-full s-content__main">
                     <p>
@@ -19,31 +22,84 @@
                     </p>
                     <h2>This Is Our Story</h2>
                     <p>
-                        Our story begins with a passion for travel and technology. As a group of writers, developers, and explorers, we saw the potential for these two fields to intersect in exciting and innovative ways. We started our blog as a way to share our experiences and insights with others who shared our interests, and we quickly found a community of like-minded individuals who were just as excited about the possibilities as we were
+                        Our story begins with a passion for travel and technology. As a group of writers, developers,
+                        and explorers, we saw the potential for these two fields to intersect in exciting and innovative
+                        ways. We started our blog as a way to share our experiences and insights with others who shared
+                        our interests, and we quickly found a community of like-minded individuals who were just as
+                        excited about the possibilities as we were
                     <p>
-                        Over the years, we've continued to grow and evolve, exploring new destinations, testing out the latest software, and sharing our knowledge with our readers. We've learned a lot along the way, and we're grateful for the opportunity to connect with so many amazing people around the world. Our journey is far from over, and we're excited to continue exploring the intersections of travel and technology with all of you."
+                        Over the years, we've continued to grow and evolve, exploring new destinations, testing out the
+                        latest software, and sharing our knowledge with our readers. We've learned a lot along the way,
+                        and we're grateful for the opportunity to connect with so many amazing people around the world.
+                        Our journey is far from over, and we're excited to continue exploring the intersections of
+                        travel and technology with all of you."
                     </p>
                     <hr>
                     <div class="row block-1-2 block-tab-full">
                         <div class="col-block">
                             <h4 class="quarter-top-margin">Who We Are.</h4>
-                            <p>We're a team of writers, developers, and travelers who are passionate about exploring new destinations and discovering innovative software. Our goal is to share our knowledge and experiences with others who share our interests. Thanks for visiting our blog, and feel free to get in touch if you have any questions or comments!</p>
+                            <p>We're a team of writers, developers, and travelers who are passionate about exploring new
+                                destinations and discovering innovative software. Our goal is to share our knowledge and
+                                experiences with others who share our interests. Thanks for visiting our blog, and feel
+                                free to get in touch if you have any questions or comments!</p>
                         </div>
                         <div class="col-block">
                             <h4 class="quarter-top-margin">Our Mission.</h4>
-                            <p>Our mission is to provide valuable information and insights for travelers and technology enthusiasts around the world. We believe that travel and technology go hand in hand, and we're committed to showcasing the ways in which these two fields intersect. Through our blog, we strive to inspire and educate our readers with informative and engaging content. Thank you for joining us on this journey!</p>
+                            <p>Our mission is to provide valuable information and insights for travelers and technology
+                                enthusiasts around the world. We believe that travel and technology go hand in hand, and
+                                we're committed to showcasing the ways in which these two fields intersect. Through our
+                                blog, we strive to inspire and educate our readers with informative and engaging
+                                content. Thank you for joining us on this journey!</p>
                         </div>
                         <div class="col-block">
                             <h4 class="quarter-top-margin">Our Vision.</h4>
-                            <p>Our vision is to be a trusted resource for travelers and tech enthusiasts worldwide. We aim to provide accurate and engaging content that inspires and informs. We're dedicated to sharing our experiences and expertise to help others enhance their travel experiences with technology. Thank you for joining us on this journey!</p>
+                            <p>Our vision is to be a trusted resource for travelers and tech enthusiasts worldwide. We
+                                aim to provide accurate and engaging content that inspires and informs. We're dedicated
+                                to sharing our experiences and expertise to help others enhance their travel experiences
+                                with technology. Thank you for joining us on this journey!</p>
                         </div>
                         <div class="col-block">
                             <h4 class="quarter-top-margin">Our Core Values.</h4>
-                            <p>Our core values are curiosity, authenticity, expertise, and community. We're committed to providing accurate and trustworthy information that educates and inspires our readers, while creating a welcoming and inclusive space for all. Thank you for sharing in our values!</p>
+                            <p>Our core values are curiosity, authenticity, expertise, and community. We're committed to
+                                providing accurate and trustworthy information that educates and inspires our readers,
+                                while creating a welcoming and inclusive space for all. Thank you for sharing in our
+                                values!</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <h2 style="margin-top: 5rem !important; margin-bottom: 5rem !important;" class="display-1 text-center">Our Team</h2>
+
+            <div class="row entries-wrap wide">
+                <div class="entries">
+
+                    <% users.forEach((user)=> { %>
+                        <article class="col-block">
+                            <div class="item-entry" data-aos="zoom-in">
+                                <div class="item-entry__thumb">
+                                    <a target="_blank" href="http://<%= user.website %>" class="item-entry__thumb-link">
+                                        <img src="/users/<%= user.image %>" alt="">
+                                    </a>
+                                </div>
+                                <div class="item-entry__text">
+                                    <div class="item-entry__cat">
+                                        <a target="_blank" href="http://<%= user.website %>"><%= user.name %></a>
+                                    </div>
+                                    <h1 class="item-entry__title"><a href="single-standard.html">
+                                            <%= user.title %>
+                                        </a></h1>
+                                    <div class="item-entry__date">
+                                        <%= user.about %>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <% } ) %>
+
+                </div>
+            </div>
+
         </section>
 
         <%- include('../partials/footer') %>

@@ -90,7 +90,7 @@ router.post('/update', auth, upload.single('image'), compressedImage, async(req,
 
     try {
 
-        const { id, name, email, about, password } = req.body
+        const { id, name, email, about, password, website } = req.body
 
         const user = await User.findByPk(id)
         
@@ -101,6 +101,7 @@ router.post('/update', auth, upload.single('image'), compressedImage, async(req,
         user.name = name
         user.email = email
         user.about = about
+        user.website = website
 
         if(password) {
             console.log('password changed')
