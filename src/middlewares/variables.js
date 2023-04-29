@@ -27,10 +27,13 @@ const addVariable = async(req,res,next) => {
         } else {
 
             const blogs = await Post.findAll({
-                include : [
-                    {model: User}
+                where: {
+                  is_active: 1
+                },
+                include: [
+                  { model: User }
                 ]
-            })
+              });              
 
             res.locals.cachedPosts = blogs
 

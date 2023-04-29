@@ -139,6 +139,10 @@ router.get('/blogs/:slug', async(req,res) => {
             ]
           });
 
+        if(blog.is_active == 0) {
+            return res.render('site/views/404')
+        }
+
         const categories = await Category.findAll()
 
         if(!blog) {
