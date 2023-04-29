@@ -11,9 +11,10 @@ const compressImage = async (req, res, next) => {
             const compressedFilePath = filePath.replace(fileExt, '_compressed.jpg');
 
             const compressedImage = await sharp(filePath)
-                .resize({ width: 800 })
-                .jpeg({ quality: 80 })
-                .toFile(compressedFilePath);
+            .resize({ width: 800 })
+            .withMetadata() 
+            .jpeg({ quality: 80 })
+            .toFile(compressedFilePath);
 
             console.log('Compressed file:', compressedImage); // Debugging line
 
