@@ -186,13 +186,51 @@ router.get('/category/:slug', async(req,res) => {
 
     try {
 
-        const category = await Category.findOne({
+        const page = req.query.page || 1
+        const limit = 10
+        const offset = ( page-1 ) * limit
+
+        const theCategory = await Category.findOne({
             where: {
                 slug: req.params.slug
             }
         })
 
-        res.render('site/views/about', {category})
+        if(!theCategory) {
+            return res.send('NO catgory')
+        }
+
+        const posts = await Post.findAll({
+            include: [
+              {
+                model: PostCategory,
+                where: {
+                  categoryId: theCategory.id
+                },
+                include : [
+                    {model: Category}
+                ]
+              }
+            ],
+            limit,
+            offset
+        });
+
+        const count = await Post.count({
+            include: [
+              {
+                model: PostCategory,
+                where: {
+                  categoryId: theCategory.id
+                }
+              }
+            ]
+          });
+          
+
+        const totalPages = Math.ceil(count / limit);
+
+        res.render('site/views/category', {theCategory ,posts, totalPages, currentPage: page})
     } catch(e) {
         console.log(e)
     }
