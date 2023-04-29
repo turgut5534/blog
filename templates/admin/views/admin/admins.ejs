@@ -1,0 +1,62 @@
+<%- include('../../partials/head' , { title: 'Users' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Users
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a class="btn btn-success" href="/admin/user/add">
+                                +Add
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row admins">
+                        <% admins.forEach((admin)=> { %>
+                            <div class="col-md-6 mb-4 admin-<%= admin.id %>">
+                                <div class="card">
+                                    <img src="/users/<%= admin.image %>" class="card-img-top" alt="<%= admin.title %>">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= admin.name %>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= admin.email %>
+                                        </h6>
+                                        <p class="card-text">
+                                            <%= admin.name %>
+                                        </p>
+                                        <a href=""
+                                            class="card-link" target="_blank">Visit website</a>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                          
+                                        </small>
+                                        <div class="float-end">
+                                            <a href="/admin/user/edit/<%= admin.id %>"
+                                                class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-outline-danger delete-data"
+                                                data-data="admin" data-title="<%= admin.name %>"
+                                                data-id="<%= admin.id %>"
+                                                data-href="/admin/user/delete/<%= admin.id %>">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+
+
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>
