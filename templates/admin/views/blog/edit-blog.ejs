@@ -20,17 +20,20 @@
 
                     <!-- <h2 class="text-center mt-5">Content</h2> -->
 
-                    <% blog.contents.forEach((content, index) => { %>
-                    <div class="mb-3 blog-edit-content-div">
-                        <p class="h2 text-center"><%= index+1 %></p>
-                        <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
-                        <textarea class="blog-content" name="" id="" cols="30" rows="10"><%= content.content %></textarea>
-                    </div>
-                    <% }) %>
+
 
                     <form action="/admin/blog/update" method="POST" class="blog-form" enctype="multipart/form-data">
 
                         <input type="hidden" name="id" value="<%= blog.id %>">
+
+                        <% blog.contents.forEach((content, index) => { %>
+                        <div class="mb-3 blog-edit-content-div">
+                            <p class="h2 text-center"><%= index+1 %></p>
+                            <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
+                            <input type="hidden" name="contentId" value="<%= content.id %>">
+                            <textarea class="blog-content" name="contentedit" id="" cols="30" rows="10"><%= content.content %></textarea>
+                        </div>
+                        <% }) %>
 
                         <% if(categories.length) { %>
                             <div class="mb-3">
@@ -53,7 +56,7 @@
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Image:</label>
-                            <input type="file" id="image" name="image" class="form-control" required>
+                            <input type="file" id="image" name="image" class="form-control">
                         </div>
 
                         <div class="mb-3">

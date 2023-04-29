@@ -6,11 +6,13 @@ const multer = require('multer')
 const path = require('path')
 const slugify = require('slugify')
 const { v4: uuidv4 } = require('uuid')
+const compressedImage = require('../../middlewares/compressImages')
+const fs = require('fs')
 
 const Post = require('../../models/post')
 const PostContent = require('../../models/postContent')
 
-const uploadDirectory = path.join(__dirname, '../../uploads')
+const uploadDirectory = path.join(__dirname, '../../../uploads')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -73,7 +75,7 @@ router.get('/edit/:id', auth, async(req,res) => {
 
 })
 
-router.post('/save', auth, upload.single('image'), async(req,res) => {
+router.post('/save', auth, upload.single('image'), compressedImage,  async(req,res) => {
 
     try {
 
@@ -101,11 +103,11 @@ router.post('/save', auth, upload.single('image'), async(req,res) => {
 
 })
 
-router.post('/update', auth, upload.single('image'), async(req,res) => {
+router.post('/update', auth, upload.single('image'), compressedImage, async(req,res) => {
 
     try {
 
-        const { id,content } = req.body
+        const { id,content, contentId } = req.body
 
         const post = await Post.findByPk(id)
 
@@ -119,6 +121,57 @@ router.post('/update', auth, upload.single('image'), async(req,res) => {
 
         res.redirect('/admin/blog')
 
+
+    } catch(e) {
+        console.log(e)
+    }
+
+})
+
+router.delete('/delete/:id', async(req,res) => {
+    
+    try {
+
+        const blog = await Post.findByPk(req.params.id)
+
+        if(!blog) {
+            return res.status(400).json({error: 'Post not found!'})
+        }
+
+        try {
+            const path = uploadDirectory + '/blogs/' + blog.image
+            await fs.promises.unlink(path)
+        } catch(e) {
+            console.log(e)
+        }
+
+        const contents = await PostContent.findAll({
+            where: {
+                postId: blog.id
+            }
+        })
+
+        if(contents) {
+
+            for(const content of contents) {
+                if(content.image) {
+                    try {
+                        const path = uploadDirectory + '/blogs/' + content.image
+                        await fs.promises.unlink(path)
+                    } catch(e) {
+                        console.log(e)
+                    }
+                }
+
+                await content.destroy()
+            }
+            
+        }
+
+        await blog.destroy()
+        
+        res.status(200).send()
+ 
 
     } catch(e) {
         console.log(e)

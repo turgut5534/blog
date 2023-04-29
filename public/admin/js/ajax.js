@@ -288,26 +288,43 @@ $('body').on('click','.change-blog-status', function(e) {
 
     const id = $(this).data('id')
 
-    $.ajax({
-        type: 'POST',
-        url: '/admin/blog/status',
-        data: {id},
-        success: function(data) {
-
-            $('.status-'+id).html(data.text)
-
-            iziToast.success({
-                title: 'OK',
-                message: 'Status succcessfully changed!',
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "The blog status will be changed",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            
+            $.ajax({
+                type: 'POST',
+                url: '/admin/blog/status',
+                data: {id},
+                success: function(data) {
+        
+                    $('.status-'+id).html(data.text)
+        
+                    iziToast.success({
+                        title: 'OK',
+                        message: 'Status succcessfully changed!',
+                    })
+        
+                },
+                error: function(e) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'An error occured changing the status',
+                    })
+                }
             })
 
-        },
-        error: function(e) {
-            iziToast.error({
-                title: 'Error',
-                message: 'An error occured changing the status',
-            })
         }
-    })
+      })
+
+    
     
 })
