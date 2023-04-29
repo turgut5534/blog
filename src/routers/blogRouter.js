@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 require('dotenv').config();
 const auth = require('../middlewares/auth')
 const sanitizeHtml = require('sanitize-html');
+const email = require('../utils/email')
 
 const User = require('../models/user')
 const Post = require('../models/post');
@@ -197,6 +198,31 @@ router.post('/user/save', async(req,res) => {
 router.get('/me', auth, (req,res) => {
 
     res.send(req.user)
+
+})
+
+router.post('/contact', async(req,res) => {
+
+    try {
+        const message = {
+            from: 'turgut@turgutsalgin.site',
+            to: 'turgutsalgin5534@gmail.com',
+            subject: 'A New Message From Blog',
+            text: req.body.message,
+            html: `<p><b>From:</b> ${req.body.name}</p>
+            <p><b>Name</b>: ${req.body.name}</p>
+            <p><b>Email</b>: ${req.body.email}</p>
+            <p><b>Message</b>: ${req.body.message}</p>`
+        }
+
+        await email.sendMail(message)
+
+        res.status(200).send()
+
+    } catch(e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
 
 })
 
