@@ -27,6 +27,7 @@
                                             <h5 class="capitalize card-title post-name-h5-<%= post.id %>">
                                                 <%= post.title %>
                                             </h5>
+                                            <h5><%= post.comments.length %> Comments</h5>
                                             <div class="d-flex justify-content-end">
                                                 <a href="/admin/comment/posts/<%= post.id %>"
                                                     class="btn btn-sm btn-outline-secondary me-2 edit-post edit-post-<%= post.id %>">Comments</a>

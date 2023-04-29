@@ -355,6 +355,11 @@ $('body').on('submit','#comment-edit-form', function(e) {
             $('.modal-backdrop').remove();
             button.html('Update')
 
+            iziToast.success({
+                title: 'OK',
+                message: 'The comment is updated successfuly!',
+            });
+
         },
         error: function(e) {
             iziToast.error({

@@ -11,7 +11,11 @@ router.get('/posts', async(req,res) => {
 
     try {
 
-        const posts = await Post.findAll()
+        const posts = await Post.findAll({
+            include: [
+                {model : Comment, as: 'comments'}
+            ]
+        })
 
         res.render('admin/views/comment/posts', {posts})
 
