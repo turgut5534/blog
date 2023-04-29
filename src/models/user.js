@@ -24,7 +24,7 @@ const User = sequelize.define('user', {
     }
   });
 
-User.hasMany(Post, { as : 'posts', foreignKey: 'authorId' })
+User.hasMany(Post, { as : 'posts', foreignKey: 'authorId', onDelete: 'CASCADE' })
 
 Post.belongsTo(User, { foreignKey: 'authorId'})
 

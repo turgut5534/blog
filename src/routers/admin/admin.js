@@ -8,6 +8,7 @@ const auth = require('../../middlewares/auth')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid')
 const fs = require('fs')
+const Post = require('../../models/post')
 
 const uploadDirectory = path.join(__dirname, '../../../uploads')
 
@@ -48,7 +49,11 @@ router.get('/edit/:id', auth, async(req,res) => {
   
     try {
 
-        const user = await User.findByPk(req.params.id)
+        const user = await User.findByPk(req.params.id, {
+            include : [
+                {model : Post, as: 'posts'}
+            ]
+        })
         res.render('admin/views/admin/edit-admin', {user})
 
     } catch(e) {
@@ -121,6 +126,12 @@ router.delete('/delete/:id', async(req,res) => {
     try {
          
         const user = await User.findByPk(req.params.id)
+        
+        const userCount = await User.count()
+
+        if(userCount == 1) {
+            return res.status(400).send()
+        }
 
         if(!user) {
             return res.status(400).send()

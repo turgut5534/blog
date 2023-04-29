@@ -1,4 +1,4 @@
-<%- include('../../partials/head' , { title: 'Add User' }) %>
+<%- include('../../partials/head' , { title: 'Edit User' }) %>
     <%- include('../../partials/sidebar') %>
         <%- include('../../partials/header') %>
 
@@ -8,7 +8,7 @@
                     <div class="row align-items-center mb-3">
                         <div class="col-6">
                             <div class="h2">
-                                Add User
+                                Edit User
                             </div>
                         </div>
                     </div>
@@ -19,6 +19,13 @@
                           <div class="mb-3 preview-image-box d-none">
                             <p class="text-center text-danger">Image Preview (Not uploaded yet)</p>
                             <img class="preview-image" style="width: 100%;" src="" alt="">
+
+                          </div>
+
+                          
+                          <div>
+                            <img class="user-image" style="width: 100%;" src="/users/<%= user.image %>" alt="">
+                            <p class="mt-3"><span class="bold">Blog Count: </span><%=  user.posts.length %></p>
                           </div>
                        
                         </div>
