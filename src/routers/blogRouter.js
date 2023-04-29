@@ -168,7 +168,9 @@ router.post('/comment', async(req,res) => {
 
         await comment.save()
 
-        res.status(201).send(comment)
+        const count = await Comment.count()
+
+        res.status(201).json({comment, count})
 
     } catch(e) {
         console.log(e)

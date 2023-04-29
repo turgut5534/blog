@@ -46,16 +46,16 @@ $('#comment-form').on('submit', function(e) {
         },
         success: function(data) {
 
-            const date = new Date(data.createdAt);
+            const date = new Date(data.comment.createdAt);
             const formattedDate = date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'});
             
             $('.commentlist').append(`<li class="depth-1 comment">
             <div class="comment__avatar">
-                <img class="avatar" src="https://ui-avatars.com/api/?length=1&name=${data.commenter}" alt="" width="50" height="50">
+                <img class="avatar" src="https://ui-avatars.com/api/?length=1&name=${data.comment.commenter}" alt="" width="50" height="50">
             </div>
             <div class="comment__content">
                 <div class="comment__info">
-                    <div class="comment__author">${data.commenter}</div>
+                    <div class="comment__author">${data.comment.commenter}</div>
                     <div class="comment__meta">
                         <div class="comment__time">${formattedDate}</div>
                         <div class="comment__reply">
@@ -64,10 +64,12 @@ $('#comment-form').on('submit', function(e) {
                     </div>
                 </div>
                 <div class="comment__text">
-                    <p>${data.content}</p>
+                    <p>${data.comment.content}</p>
                 </div>
             </div>
         </li>`)
+
+        $('.comment-count').html(data.count+ ' Comments')
 
         },
         error: function(e) {
