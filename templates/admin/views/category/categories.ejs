@@ -19,22 +19,26 @@
                     </div>
 
                     <div class="row categories">
-                        <% categories.forEach((category)=> { %>
-                            <div class="col-12 col-md-6 col-lg-4 category-<%= category.id %>">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="capitalize card-title category-name-h5-<%= category.id %>">
-                                            <%= category.name %>
-                                        </h5>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="javascript:;"
-                                                class="btn btn-sm btn-outline-secondary me-2 edit-category edit-category-<%= category.id %>" data-id="<%= category.id %>" data-title="<%= category.name %>" data-rate="<%= category.rate %>" data- data-bs-toggle="modal" data-bs-target="#editCategoryModal">Edit</a>
-                                            <a href="javascript:;" data-data="category" data-href="/admin/category/delete/<%= category.id %>" data-title="<%= category.name %>" data-id="<%= category.id %>" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                        <% if(categories.length) { %>
+                            <% categories.forEach((category)=> { %>
+                                <div class="col-12 col-md-6 col-lg-4 category-<%= category.id %>">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="capitalize card-title category-name-h5-<%= category.id %>">
+                                                <%= category.name %>
+                                            </h5>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:;"
+                                                    class="btn btn-sm btn-outline-secondary me-2 edit-category edit-category-<%= category.id %>" data-id="<%= category.id %>" data-title="<%= category.name %>" data-rate="<%= category.rate %>" data- data-bs-toggle="modal" data-bs-target="#editCategoryModal">Edit</a>
+                                                <a href="javascript:;" data-data="category" data-href="/admin/category/delete/<%= category.id %>" data-title="<%= category.name %>" data-id="<%= category.id %>" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% }) %>
+                                <% }) %>
+                            <% } else {%>
+                                <p>No categories</p>
+                            <% } %>
                     </div>
                 </div>
             </main>
