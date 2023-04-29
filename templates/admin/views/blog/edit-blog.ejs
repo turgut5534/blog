@@ -26,15 +26,6 @@
 
                         <input type="hidden" name="id" value="<%= blog.id %>">
 
-                        <% blog.contents.forEach((content, index) => { %>
-                        <div class="mb-3 blog-edit-content-div">
-                            <p class="h2 text-center"><%= index+1 %></p>
-                            <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
-                            <input type="hidden" name="contentId" value="<%= content.id %>">
-                            <textarea class="blog-content" name="contentedit" id="" cols="30" rows="10"><%= content.content %></textarea>
-                        </div>
-                        <% }) %>
-
                         <% if(categories.length) { %>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Categories:</label>
@@ -52,6 +43,15 @@
                                 </div>
                             </div>
                         <% } %>
+
+                        <% blog.contents.forEach((content, index) => { %>
+                        <div class="mb-3 blog-edit-content-div">
+                            <p class="h2 text-center"><%= index+1 %></p>
+                            <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
+                            <input type="hidden" name="contentId" value="<%= content.id %>">
+                            <textarea class="blog-content" name="contentedit" id="" cols="30" rows="10"><%= content.content %></textarea>
+                        </div>
+                        <% }) %>
 
                         <p class="h2 text-center mt-5">New Content</p>
 

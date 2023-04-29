@@ -134,12 +134,16 @@ router.post('/update', auth, upload.single('image'), compressedImage, async(req,
             image = req.file.filename
         }
 
-        const postContent = new PostContent({
-            postId: post.id,
-            content:content
-        })
+        if(content) {
+            const postContent = new PostContent({
+                postId: post.id,
+                content:content,
+                image: image
+            })
+    
+            await postContent.save()
+        }
 
-        await postContent.save()
 
 
         // ------------------------------
