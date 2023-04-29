@@ -12,7 +12,8 @@ const Post = require('../models/post');
 const PostContent = require('../models/postContent');
 const Comment = require('../models/comment');
 const Category = require('../models/category');
-const variable = require('../middlewares/variables')
+const variable = require('../middlewares/variables');
+const PostCategory = require('../models/postCategory');
 
 router.use(variable)
 
@@ -28,14 +29,30 @@ router.get('/sanitize', (req,res) => {
 router.get('/', async(req,res) => {
     
     try {
+
+        const page = req.query.page || 1; // Get the current page number from the query parameters, default to 1
+        const limit = 12; // Limit the number of posts per page to 10
+        const offset = (page - 1) * limit;
         
         const blogs = await Post.findAll({
             where: {
                 is_active : 1
-            }
+            },
+            include: [
+                {model: User},
+                {model: PostCategory, include: [
+                    {model: Category}
+                ]}
+            ],
+            limit,
+            offset,
         })
 
-        res.render('site/views/index', {blogs})
+        const count = await Post.count()
+
+        const totalPages = Math.ceil(count / limit); // Calculate the total number of pages based on the count and limit
+
+        res.render('site/views/index', {blogs, totalPages, currentPage: page})
     } catch(e) {
         console.log(e)
     }
