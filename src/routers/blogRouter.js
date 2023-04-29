@@ -154,10 +154,18 @@ router.get('/about', (req,res) => {
 
 })
 
-router.get('/contact', (req,res) => {
+router.get('/contact', async(req,res) => {
 
-    res.render('site/views/contact')
+    try {
 
+        const users = await User.findAll()
+
+        res.render('site/views/contact', {users})
+
+    } catch(e) {
+        console.log(e)
+    }
+   
 })
 
 router.post('/comment', async(req,res) => {

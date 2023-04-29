@@ -1,4 +1,4 @@
-<%- include('../partials/head' , { title: 'Homepage' }) %>
+<%- include('../partials/head' , { title: 'Contact' }) %>
     <%- include('../partials/header') %>
 
         <section class="s-content s-content--top-padding s-content--narrow">
@@ -6,9 +6,7 @@
                 <div class="col-full s-content__header">
                     <h1 class="display-1 display-1--with-line-sep">Contact Us.</h1>
                     <p class="lead">
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor
-                        sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim
-                        mollit amet anim veniam dolor dolor irure velit commodo.</p>
+                        Get in touch with us! We'd love to hear your thoughts and answer any questions you may have. Please fill out the form below or send us an email, and we'll get back to you as soon as possible. Thank you for visiting our website!</p>
                 </div>
             </div>
             <div class="row">
@@ -21,37 +19,25 @@
                     </p>
                     <h2>Say Hello</h2>
                     <p>
-                        Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                        dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
-                        sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-                    <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor
-                        sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim
-                        mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco. Lorem
-                        ipsum Nisi amet fugiat eiusmod et aliqua ad qui ut nisi Ut aute anim mollit fugiat aute.
+                        Thank you for visiting our website! We're excited to hear from you and welcome your feedback, questions, and comments. If you have any inquiries regarding our blog posts, software recommendations, or travel experiences, please don't hesitate to reach out. We strive to provide helpful and informative content to our readers, and we're always looking for ways to improve. Your input is important to us, so please feel free to contact us using the form below or via email. We'll do our best to respond to your message in a timely manner. Thanks again for your interest in our website, and we look forward to hearing from you!
                     </p>
-                    <div id="map-wrap">
-                        <div id="map-container"></div>
-                        <div id="map-zoom-in"></div>
-                        <div id="map-zoom-out"></div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.5489304129846!2d19.109016876893396!3d50.82099546061434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710b5d56e25258f%3A0xa2fad37e74db368a!2sCz%C4%99stochowa%20University%20of%20Technology!5e0!3m2!1sen!2str!4v1682795823711!5m2!1sen!2str" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="row">
                         <div class="col-six tab-full">
                             <h4>Where to Find Us</h4>
-                            <p>
-                                1600 Amphitheatre Parkway<br>
-                                Mountain View, CA<br>
-                                94043 US
-                            </p>
+                            <p>Czestochowa / POLAND</p>
                         </div>
                         <div class="col-six tab-full">
                             <h4>Contact Info</h4>
-                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                    data-cfemail="2655475f4e434a4a496651495442554b4f524e0845494b">[email&#160;protected]</a><br>
+                            <p>
+                                <% users.forEach((user) => { %>
                                 <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                    data-cfemail="acc5c2cac3ecdbc3dec8dfc1c5d8c482cfc3c1">[email&#160;protected]</a>
+                                    data-cfemail="2655475f4e434a4a496651495442554b4f524e0845494b"><%= user.email %>
+                                </a>
                                 <br>
-                                Phone: (+1) 123 456
+                                <% })%>
                             </p>
                         </div>
                     </div>
@@ -78,4 +64,4 @@
             </div>
         </section>
 
-        <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>
