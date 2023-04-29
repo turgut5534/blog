@@ -41,7 +41,8 @@
                                 <div class="row">
                                     <% categories.forEach((c)=> { %>
                                         <div class="col-12 col-md-4 col-lg-3">
-                                            <input value="<%= c.id %>" name="categories" id="<%= c.id %>"
+                                            <% let checked = blog.post_categories.some(cat => cat.categoryId === c.id) %>
+                                            <input value="<%= c.id %>" name="categories" id="<%= c.id %>" <% if (checked) { %> checked <% } %>
                                                 type="checkbox">
                                             <label style="text-transform: capitalize" for="<%= c.id %>">
                                                 <%= c.name %>

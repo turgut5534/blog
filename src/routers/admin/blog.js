@@ -12,6 +12,7 @@ const sanitizeHtml = require('sanitize-html');
 
 const Post = require('../../models/post')
 const PostContent = require('../../models/postContent')
+const PostCategory = require('../../models/postCategory')
 
 const uploadDirectory = path.join(__dirname, '../../../uploads')
 
@@ -63,7 +64,8 @@ router.get('/edit/:id', auth, async(req,res) => {
         const categories = await Category.findAll()
         const blog = await Post.findByPk(req.params.id, {
             include: [
-                { model: PostContent, as: 'contents' }
+                { model: PostContent, as: 'contents' },
+                {model : PostCategory}
             ]
         });
         
@@ -80,7 +82,7 @@ router.post('/save', auth, upload.single('image'), compressedImage,  async(req,r
 
     try {
 
-        const { title } = req.body
+        const { title, categories } = req.body
 
         const post = new Post({
             title: title,
@@ -93,7 +95,22 @@ router.post('/save', auth, upload.single('image'), compressedImage,  async(req,r
             authorId: req.user.id
         })
 
-        await post.save()
+        const newPost = await post.save()
+
+        if(categories) {
+
+            for(const category of categories) {
+
+                const theCategory = await Category.findByPk(category)
+                
+                await PostCategory.create({
+                    postId: newPost.id,
+                    categoryId: theCategory.id
+                })
+
+            }
+
+        }
 
         res.redirect('/admin/blog')
 
@@ -108,17 +125,67 @@ router.post('/update', auth, upload.single('image'), compressedImage, async(req,
 
     try {
 
-        const { id,content, contentId } = req.body
+        const { id,content, categories } = req.body
+        let image = null
 
         const post = await Post.findByPk(id)
 
+        if(req.file) {
+            image = req.file.filename
+        }
+
         const postContent = new PostContent({
             postId: post.id,
-            image: req.file.filename,
             content:content
         })
 
         await postContent.save()
+
+
+        // ------------------------------
+
+        const postCategories = await PostCategory.findAll({
+            where: { postId: post.id },
+            include: [Category]
+          });
+      
+          const categoryIDs = postCategories.map(category => category.category.id);
+    
+    
+          // get unchecked tags
+          const checkedCategories = categories 
+          let checkedCategoryIds = [] 
+      
+    
+          if(checkedCategories != undefined && Array.isArray(checkedCategories) ) {
+            checkedCategoryIds.push(checkedCategories.map(id => parseInt(id)));
+          }
+      
+    
+          for(i=0; i<categoryIDs.length; i++) {
+      
+            if(!checkedCategoryIds.includes(categoryIDs[i])) {
+              await PostCategory.destroy({ where: { postId: post.id, categoryId: categoryIDs[i] } })
+            }
+      
+          }
+    
+          if(categories) {
+            for(const category of categories) {
+      
+                const checkPostCatgory = await PostCategory.findOne({ where: { postId: post.id, categoryId: category } });
+      
+                if(!checkPostCatgory) {
+                    await PostCategory.create({
+                      postId : post.id,
+                      categoryId: category
+                    })
+                }
+    
+            }
+          }
+
+        //   ---------------------------------
 
         res.redirect('/admin/blog')
 
