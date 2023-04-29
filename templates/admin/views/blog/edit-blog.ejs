@@ -45,11 +45,13 @@
                         <% } %>
 
                         <% blog.contents.forEach((content, index) => { %>
-                        <div class="mb-3 blog-edit-content-div">
+                        <div class="mb-3 blog-edit-content-div content-<%= content.id %>">
                             <p class="h2 text-center"><%= index+1 %></p>
                             <img class="content-image mb-3" src="/blogs/<%= content.image %>" alt="">
                             <input type="hidden" name="contentId" value="<%= content.id %>">
                             <textarea class="blog-content" name="contentedit" id="" cols="30" rows="10"><%= content.content %></textarea>
+
+                            <a href="jaavscript:;" data-data="content" data-title="<%= content.id %>" data-href="/admin/blog/content/delete/<%= content.id %>" data-id="<%= content.id %>" class="btn btn-danger delete-data mt-3">Delete</a>
                         </div>
                         <% }) %>
 

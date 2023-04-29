@@ -251,6 +251,40 @@ router.delete('/delete/:id', async(req,res) => {
 
 })
 
+router.delete('/content/delete/:id', async(req,res) => {
+    
+    try {
+
+        const content = await PostContent.findByPk(req.params.id)
+
+        if(!content) {
+            res.status(400).send()
+        }
+
+        if(content.image) {
+            
+            try {
+
+                const path = uploadDirectory + '/blogs/' + content.image
+                await fs.promises.unlink(path)
+
+            } catch(e) {
+                console.log(e)
+            }
+
+        }
+
+        await content.destroy()
+        
+        res.status(200).send()
+ 
+
+    } catch(e) {
+        console.log(e)
+    }
+
+})
+
 router.post('/status', async(req,res) => {
 
     try {
