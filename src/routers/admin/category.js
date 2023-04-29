@@ -39,6 +39,28 @@ router.post('/save', async(req,res) => {
 
 })
 
+router.post('/update', async(req,res) => {
+
+    try{
+        
+        const category = await Category.findByPk(req.body.id)
+        category.name = req.body.name
+        category.slug = slugiyf(req.body.name, {
+            lower: true,
+            strict: true
+        })
+
+        await category.save()
+
+        res.status(201).json({category})
+
+    } catch(e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+
+})
+
 router.delete('/delete/:id', async(req,res) => {
 
     try{

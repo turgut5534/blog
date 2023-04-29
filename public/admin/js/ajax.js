@@ -126,8 +126,7 @@ $('body').on('submit','#category-edit-form', function(e) {
         },
         success: function(response) {
 
-            $('.category-name-h5-'+ response.category.id).html(response.category.name)
-      
+        $('.category-name-h5-'+ response.category.id).html(response.category.name)
         $('#editCategoryModal').modal('hide')
         $('.modal-backdrop').remove();
         button.html('Update')
