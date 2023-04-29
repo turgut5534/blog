@@ -6,6 +6,7 @@ require('dotenv').config();
 const auth = require('../middlewares/auth')
 const sanitizeHtml = require('sanitize-html');
 const email = require('../utils/email')
+const { Op } = require('sequelize');
 
 const User = require('../models/user')
 const Post = require('../models/post');
@@ -140,7 +141,40 @@ router.get('/blogs/:slug', async(req,res) => {
 
         const categories = await Category.findAll()
 
-        res.render('site/views/detail', {blog, categories, sanitizeHtml })
+        if(!blog) {
+            return res.send('Blog not found')
+        }
+
+        let nextPost = await Post.findOne({
+            where: {
+              id: {
+                [Op.gt]: blog.id
+              }
+            }
+          });
+
+        if(!nextPost) {
+            nextPost = await Post.findOne({
+                order: [['createdAt', 'ASC']]
+              });
+        }
+
+        let previousPost = await Post.findOne({
+            where: {
+              id: {
+                [Op.lt]: blog.id
+              }
+            }
+          });
+
+        if(!previousPost) {
+            previousPost = await Post.findOne({
+                order: [['createdAt', 'DESC']]
+              });
+        }
+
+
+        res.render('site/views/detail', {blog, categories, sanitizeHtml, previousPost, nextPost })
 
     } catch(e) {
         console.log(e)

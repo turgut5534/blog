@@ -47,15 +47,15 @@
             <div class="s-content__entry-nav">
                 <div class="row s-content__nav">
                     <div class="col-six s-content__prev">
-                        <a href="#0" rel="prev">
+                        <a href="/blogs/<%= previousPost.slug %>" rel="prev">
                             <span>Previous Post</span>
-                            The Pomodoro Technique Really Works.
+                            <%= previousPost.title %>
                         </a>
                     </div>
                     <div class="col-six s-content__next">
-                        <a href="#0" rel="next">
+                        <a href="/blogs/<%= nextPost.slug %>" rel="next">
                             <span>Next Post</span>
-                            3 Benefits of Minimalism In Interior Design.
+                            <%= nextPost.title %>
                         </a>
                     </div>
                 </div>
