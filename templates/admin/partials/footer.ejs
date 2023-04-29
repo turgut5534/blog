@@ -44,32 +44,28 @@
 </div>
 
 
-<div class="modal fade" id="editSkillModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/admin/skills/update" method="POST" id="skill-edit-form">
+            <form action="/admin/comment/update" method="POST" id="comment-edit-form">
 
-                <input type="hidden" id="edit-skill-id" name="id" value="">
+                <input type="hidden" id="edit-comment-id" name="id" value="">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label for="inputText" class="form-label">Title</label>
-                        <input required type="text" name="title" class="form-control" id="skill-title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputNumber" class="form-label">Rate</label>
-                        <input required type="number" name="rate" class="form-control" id="skill-rate">
+                        <label for="inputText" class="form-label">Comment</label>
+                        <input required type="text" name="content" class="form-control" id="comment-comment">
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary save-skill-button">Update</button>
+                    <button type="submit" class="btn btn-primary update-comment-button">Update</button>
                 </div>
             </form>
         </div>

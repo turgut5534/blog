@@ -26,7 +26,7 @@
           <h3>Categories</h3>
           <ul class="linklist">
             <% myData.forEach((category) => {%>
-            <li><a href="#0"><%= category.name %></a></li>
+            <li><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
             <% }) %>
           </ul>
         </div>

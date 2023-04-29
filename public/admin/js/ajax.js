@@ -323,8 +323,46 @@ $('body').on('click','.change-blog-status', function(e) {
             })
 
         }
-      })
+      })  
+})
 
-    
+$('.edit-comment').on('click', function() {
+
+    const id = $(this).data('id')
+    const comment = $(this).data('comment')
+
+    $('#edit-comment-id').val(id)
+    $('#comment-comment').val(comment)
+})
+
+$('body').on('submit','#comment-edit-form', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.update-comment-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Updating...')
+        },
+        success: function(response) {
+
+            $('.comment-content-'+ response.comment.id).html(response.comment.content)
+            $('#editCommentModal').modal('hide')
+            $('.modal-backdrop').remove();
+            button.html('Update')
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'An error occured updating the data',
+            });
+            button.html('Update')
+        }
+    })
     
 })

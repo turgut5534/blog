@@ -12,26 +12,30 @@
             </div>
             <div class="row entries-wrap add-top-padding wide">
                 <div class="entries">
-                    <% posts.forEach((post) => { %>
-                        <article class="col-block">
-                            <div class="item-entry" data-aos="zoom-in">
-                                <div class="item-entry__thumb">
-                                    <a href="/blogs/<%= post.slug %>" class="item-entry__thumb-link">
-                                        <img src="/blogs/<%= post.image %>" alt="">
-                                    </a>
-                                </div>
-                                <div class="item-entry__text">
-                                    <div class="item-entry__cat">
-                                        <a href="category.html"><%= post.post_categories.map(c => c.category.name).join(',') %></a>
+                    <% if(posts.length) { %>
+                        <% posts.forEach((post) => { %>
+                            <article class="col-block">
+                                <div class="item-entry" data-aos="zoom-in">
+                                    <div class="item-entry__thumb">
+                                        <a href="/blogs/<%= post.slug %>" class="item-entry__thumb-link">
+                                            <img src="/blogs/<%= post.image %>" alt="">
+                                        </a>
                                     </div>
-                                    <h1 class="item-entry__title"><a href="/blogs/<%= post.slug %>"><%= post.title %></a></h1>
-                                    <div class="item-entry__date">
-                                        <a href="/blogs/<%= post.slug %>"><%= post.createdAt.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></a>
+                                    <div class="item-entry__text">
+                                        <div class="item-entry__cat">
+                                            <a href="category.html"><%= post.post_categories.map(c => c.category.name).join(',') %></a>
+                                        </div>
+                                        <h1 class="item-entry__title"><a href="/blogs/<%= post.slug %>"><%= post.title %></a></h1>
+                                        <div class="item-entry__date">
+                                            <a href="/blogs/<%= post.slug %>"><%= post.createdAt.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
-                  <% }) %>
+                            </article>
+                    <% }) %>
+                  <% } else{ %>
+                        <p>No post in this category</p>
+                  <% } %>
                 </div>
             </div>
             <div class="row pagination-wrap">

@@ -1,0 +1,45 @@
+<%- include('../../partials/head' , { title: 'Posts' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Posts
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addpostModal">
+                                +Add
+                              </button>
+                        </div>
+                    </div>
+
+                    <div class="row categories">
+                        <% if(posts.length) { %>
+                            <% posts.forEach((post)=> { %>
+                                <div class="col-12 col-md-6 col-lg-4 post-<%= post.id %>">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="capitalize card-title post-name-h5-<%= post.id %>">
+                                                <%= post.title %>
+                                            </h5>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="/admin/comment/posts/<%= post.id %>"
+                                                    class="btn btn-sm btn-outline-secondary me-2 edit-post edit-post-<%= post.id %>">Comments</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                            <% } else {%>
+                                <p>No posts</p>
+                            <% } %>
+                    </div>
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

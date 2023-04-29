@@ -1,0 +1,42 @@
+<%- include('../../partials/head' , { title: 'Comments' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Comments for <%= post.title %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row categories">
+                        <% if(comments.length) { %>
+                            <% comments.forEach((comment)=> { %>
+                                <div class="col-12 col-md-6 col-lg-4 comment-<%= comment.id %>">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="capitalize card-title comment-name-h5-<%= comment.id %>">
+                                                <%= comment.commenter %>
+                                            </h5>
+                                            <h5 class="comment-content-<%= comment.id %>"><%= comment.content %></h5>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:;"
+                                                    class="btn btn-sm btn-outline-secondary me-2 edit-comment edit-comment-<%= comment.id %>" data-id="<%= comment.id %>" data-comment="<%= comment.content %>" data-bs-toggle="modal" data-bs-target="#editCommentModal">Edit</a>
+                                                <a href="javascript:;" data-data="comment" data-href="/admin/comment/delete/<%= comment.id %>" data-title="<%= comment.commenter %>" data-id="<%= comment.id %>" class="btn btn-sm btn-outline-danger delete-data">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                            <% } else {%>
+                                <p>No comment for this post</p>
+                            <% } %>
+                    </div>
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>
