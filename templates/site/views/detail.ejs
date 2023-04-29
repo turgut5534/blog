@@ -4,7 +4,7 @@
         <section class="s-content s-content--top-padding s-content--narrow">
             <article class="row entry format-standard">
                 <div class="entry__media col-full">
-                    <div class="entry__post-thumb">
+                    <div class="entry__post-thumb text-center">
                         <img src="/blogs/<%= blog.image %>" alt="">
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <p class="text-center">
                         <img class="blog-content-image" src="/blogs/<%= content.image %>" alt="">
                     </p>
-                    <p><%= content.content %></p>
+                    <p><%= sanitizeHtml(content.content, {allowedTags: [], allowedAttributes: {}}) %></p>
 
                     <% }) %>
                   
@@ -102,21 +102,22 @@
 
                     <div id="respond" class="col-full">
                         <h3 class="h2">Add Comment <span>Your email address will not be published</span></h3>
-                        <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+                        <form id="comment-form" method="post" action="/comment" autocomplete="off">
+                            <input type="hidden" name="postId" value="<%= blog.id %>">
                             <fieldset>
                                 <div class="form-field">
-                                    <input name="cName" id="cName" class="full-width" placeholder="Your Name*" value=""
+                                    <input name="commenter" id="cName" class="full-width" placeholder="Your Name*" value=""
                                         type="text">
                                 </div>
                                 <div class="form-field">
-                                    <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email*"
+                                    <input name="email" id="cEmail" class="full-width" placeholder="Your Email*"
                                         value="" type="text">
                                 </div>
                                 <div class="message form-field">
-                                    <textarea name="cMessage" id="cMessage" class="full-width"
+                                    <textarea name="content" id="cMessage" class="full-width"
                                         placeholder="Your Message*"></textarea>
                                 </div>
-                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width"
+                                <input name="submit" id="submit" class="comment-button btn btn--primary btn-wide btn--large full-width"
                                     value="Add Comment" type="submit">
                             </fieldset>
                         </form>

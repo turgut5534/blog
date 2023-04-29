@@ -30,3 +30,53 @@ $('#login-form').on('submit', function(e) {
     })
     
 })
+
+$('#comment-form').on('submit', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.comment-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Please wait...')
+        },
+        success: function(data) {
+
+            const date = new Date(data.createdAt);
+            const formattedDate = date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'});
+            
+            $('.commentlist').append(`<li class="depth-1 comment">
+            <div class="comment__avatar">
+                <img class="avatar" src="https://ui-avatars.com/api/?length=1&name=${data.commenter}" alt="" width="50" height="50">
+            </div>
+            <div class="comment__content">
+                <div class="comment__info">
+                    <div class="comment__author">${data.commenter}</div>
+                    <div class="comment__meta">
+                        <div class="comment__time">${formattedDate}</div>
+                        <div class="comment__reply">
+                            <a class="comment-reply-link" href="#0">Reply</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment__text">
+                    <p>${data.content}</p>
+                </div>
+            </div>
+        </li>`)
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Incorrect username or password',
+            });
+            button.html('Send')
+        }
+    })
+    
+})

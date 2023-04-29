@@ -15,6 +15,15 @@ const variable = require('../middlewares/variables')
 
 router.use(variable)
 
+router.get('/sanitize', (req,res) => {
+    const htmlText = '<p>This is some <b>HTML</b> text.</p>';
+    const sanitizedText = sanitizeHtml(htmlText, {
+        allowedTags: [],
+        allowedAttributes: {}
+      });
+      console.log(sanitizedText);
+})
+
 router.get('/', async(req,res) => {
     
     try {
@@ -110,10 +119,10 @@ router.get('/blogs/:slug', async(req,res) => {
               }
             ]
           });
-          
+
         const categories = await Category.findAll()
 
-        res.render('site/views/detail', {blog, categories })
+        res.render('site/views/detail', {blog, categories, sanitizeHtml })
 
     } catch(e) {
         console.log(e)
@@ -147,6 +156,24 @@ router.get('/about', (req,res) => {
 router.get('/contact', (req,res) => {
 
     res.render('site/views/contact')
+
+})
+
+router.post('/comment', async(req,res) => {
+
+    try {
+
+        const comment = new Comment(req.body)
+        comment.postId = req.body.postId
+
+        await comment.save()
+
+        res.status(201).send(comment)
+
+    } catch(e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
 
 })
 

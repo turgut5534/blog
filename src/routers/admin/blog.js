@@ -8,6 +8,7 @@ const slugify = require('slugify')
 const { v4: uuidv4 } = require('uuid')
 const compressedImage = require('../../middlewares/compressImages')
 const fs = require('fs')
+const sanitizeHtml = require('sanitize-html');
 
 const Post = require('../../models/post')
 const PostContent = require('../../models/postContent')
