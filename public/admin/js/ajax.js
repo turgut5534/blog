@@ -389,8 +389,9 @@ $('body').on('submit','#album-add-form', function(e) {
             $('.albums').append(`<div class="col-md-3 mb-4 album-${data.id}">
                 <div class="card">
                     <a href="/admin/gallery/${data.slug}">
-                    <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
+                    <img style="height:400px; object-fit: contain; margin-top: 20px;" src="/img/nophoto.png" class="card-img-top"
                         alt="...">
+                        <button data-id="${data.id}" data-title="${data.name}" type="button" class="remove-image-btn remove-album" style="position: absolute; top: 5px; right: 5px;" >X</button>
                     <div class="card-body">
                         <h5 class="card-title text-center">${data.name}</h5>
                     </div>
@@ -420,7 +421,7 @@ $('body').on('submit','#album-add-form', function(e) {
     
 })
 
-$('.remove-album').on('click', function(e) {
+$('body').on('click', '.remove-album' , function(e) {
 
     e.preventDefault()
 
@@ -447,16 +448,18 @@ $('.remove-album').on('click', function(e) {
       
                   $('.status-'+id).html(data.text)
       
+                  $('.album-'+id).remove()
+
                   iziToast.success({
                       title: 'OK',
-                      message: 'Status succcessfully changed!',
+                      message: 'Album deleted successfuly!',
                   })
       
               },
               error: function(e) {
                   iziToast.error({
                       title: 'Error',
-                      message: 'An error occured changing the status',
+                      message: 'An error occured deleting the album',
                   })
               }
           })

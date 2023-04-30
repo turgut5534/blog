@@ -33,6 +33,7 @@
                                             <% } else {%>
                                                 <img style="height:400px; object-fit: contain; margin-top: 20px;" src="/img/nophoto.png" class="card-img-top"
                                                 alt="...">
+                                                <button data-id="<%= album.id %>" data-title="<%= album.name %>" type="button" class="remove-image-btn remove-album" style="position: absolute; top: 5px; right: 5px;" >X</button>
                                             <% } %>
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">

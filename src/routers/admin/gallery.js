@@ -68,24 +68,25 @@ router.delete('/delete/:id' , async(req,res) => {
             ]
         }) 
         
+        if(albumPhotos) {
+            for(const album of albumPhotos) {
 
-        for(const album of albumPhotos) {
-
-            const thePhoto = album.photo
-
-            try {
-
-                const path = uploadDirectory + '/gallery/' + thePhoto.filename
-                await fs.promises.unlink(path)
-
-            } catch(e) {
-                console.log(e)
+                const thePhoto = album.photo
+    
+                try {
+    
+                    const path = uploadDirectory + '/gallery/' + thePhoto.filename
+                    await fs.promises.unlink(path)
+    
+                } catch(e) {
+                    console.log(e)
+                }
+                
+                await thePhoto.destroy()
+    
+                await album.destroy()
+    
             }
-            
-            await thePhoto.destroy()
-
-            await album.destroy()
-
         }
 
         await album.destroy()
