@@ -15,6 +15,8 @@ const Comment = require('../models/comment');
 const Category = require('../models/category');
 const variable = require('../middlewares/variables');
 const PostCategory = require('../models/postCategory');
+const Album = require('../models/album');
+const Photo = require('../models/photo');
 
 router.use(variable)
 
@@ -63,6 +65,56 @@ router.get('/', async(req,res) => {
 router.get('/login', (req,res) => {
 
     res.render('site/views/login')
+
+})
+
+router.get('/gallery', async(req,res) => {
+
+    try {
+
+        const page = req.query.page || 1; // Get the current page number from the query parameters, default to 1
+        const limit = 12; // Limit the number of posts per page to 10
+        const offset = (page - 1) * limit;
+
+        const albums = await Album.findAll()
+
+        const count = await Album.count()
+
+        const totalPages = Math.ceil(count / limit); // 
+
+        res.render('site/views/gallery', {albums, totalPages, currentPage: page})
+
+    } catch(e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/album/:slug', async(req,res) => {
+
+    try {
+
+        const album = await Album.findOne({
+            where: {
+                slug: req.parasm.slug
+            }
+        }) 
+
+        if(!album) {
+            return res.render('site/views/404')
+        }
+
+        const photos = await Photo.findAll({
+            where: {
+                albumId: album.id
+            }
+        })
+
+        res.render('site/views/photos.ejs', {photos})
+
+    } catch(e) {
+        console.log(e)
+    }
 
 })
 

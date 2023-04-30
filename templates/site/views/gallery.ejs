@@ -1,0 +1,61 @@
+<%- include('../partials/head' , { title: 'Categories' }) %>
+    <%- include('../partials/header') %>
+
+        <section class="s-content s-content--top-padding">
+            <div class="row entries-wrap add-top-padding wide">
+                <div class="entries">
+                    <% if (albums.length) { %>
+                        <% albums.forEach(() => { %>
+                            <article class="col-block">
+                                <div class="item-entry" data-aos="zoom-in">
+                                    <div class="item-entry__thumb">
+                                        <a href="single-standard.html" class="item-entry__thumb-link">
+                                            <img src="images/thumbs/post/lamp-400.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="item-entry__text">
+                                        <div class="item-entry__cat">
+                                            <a href="category.html">Design</a>
+                                        </div>
+                                        <h1 class="item-entry__title"><a href="single-standard.html">3 Benefits of Minimalism In
+                                                Interior Design.</a></h1>
+                                        <div class="item-entry__date">
+                                            <a href="single-standard.html">June 15, 2018</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }) %>
+                    <% } else { %>
+                            <p>No album</p>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row pagination-wrap">
+                <div class="col-full">
+                  <nav class="pgn" data-aos="fade-up">
+                    <ul>
+                      <% if(currentPage > 1) { %>
+                      <li><a class="pgn__prev" href="/category/<%= theCategory.slug %>?page=<%= currentPage - 1 %>">Prev</a></li>
+                      <% } %>
+                      <% for(let i = 1; i <= totalPages; i++) { %>
+                      <% if(i === currentPage) { %>
+                      <li><span class="pgn__num current"><%= i %></span></li>
+                      <% } else { %>
+                      <% if(i > currentPage - 3 && i < currentPage + 3) { %>
+                      <li><a class="pgn__num" href="/category/<%= theCategory.slug %>?page=<%= i %>"><%= i %></a></li>
+                      <% } else if(i === currentPage - 3 || i === currentPage + 3) { %>
+                      <li><span class="pgn__num dots">…</span></li>
+                      <% } %>
+                      <% } %>
+                      <% } %>
+                      <% if(currentPage < totalPages) { %>
+                      <li><a class="pgn__next" href="/category/<%= theCategory.slug %>?page=<%= currentPage + 1 %>">Next</a></li>
+                      <% } %>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+        </section>
+
+        <%- include('../partials/footer') %>

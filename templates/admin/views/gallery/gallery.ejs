@@ -1,0 +1,42 @@
+<%- include('../../partials/head' , { title: 'Albums' }) %>
+    <%- include('../../partials/sidebar') %>
+        <%- include('../../partials/header') %>
+
+            <main class="content">
+                <div class="container-fluid mt-4">
+                    
+                    <div class="row align-items-center mb-3">
+                        <div class="col-6">
+                            <div class="h2">
+                                Albums
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAlbumModal">
+                                +Add
+                              </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row albums">
+
+                        <% if(albums.length) { %>
+                            <% albums.forEach((album)=> { %>
+                                <div class="col-md-3 mb-4 album-<%= album.id %>">
+                                    <div class="card">
+                                        <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
+                                            alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><%= album.name %></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        <% }else { %>
+                            <p>No album</p>
+                        <% } %>
+                    </div>
+                </div>
+            </main>
+
+<%- include('../../partials/footer') %>

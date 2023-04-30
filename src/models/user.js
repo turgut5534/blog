@@ -2,6 +2,8 @@ const Sequelize = require('sequelize')
 const sequelize = require('../db/mysql')
 const Post = require('./post')
 const Category = require('./category')
+const Album = require('./album')
+const Photo = require('./photo')
 
 const User = sequelize.define('user', {
     name: {
@@ -28,9 +30,11 @@ const User = sequelize.define('user', {
   });
 
 User.hasMany(Post, { as : 'posts', foreignKey: 'authorId', onDelete: 'CASCADE' })
+User.hasMany(Album)
 
 Post.belongsTo(User, { foreignKey: 'authorId'})
+Album.belongsTo(User)
 
-// sequelize.sync()
+sequelize.sync()
 
 module.exports = User

@@ -18,7 +18,7 @@ $('#login-form').on('submit', function(e) {
             button.html('Please wait...')
         },
         success: function(response) {
-            window.location.href = '/me'
+            window.location.href = '/admin/blog'
         },
         error: function(e) {
             iziToast.error({

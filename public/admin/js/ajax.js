@@ -370,3 +370,50 @@ $('body').on('submit','#comment-edit-form', function(e) {
     })
     
 })
+
+$('body').on('submit','#album-add-form', function(e) {
+
+    e.preventDefault()
+
+    const button = $('.save-album-button')
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        beforeSend: function() {
+            button.html('Saving...')
+        },
+        success: function(data) {
+
+            $('.albums').append(`<div class="col-md-3 mb-4 album-${data.id}">
+                <div class="card">
+                    <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
+                        alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${data.name}</h5>
+                    </div>
+                </div>
+            </div>`)
+
+            iziToast.success({
+                title: 'OK',
+                message: 'Album is added successfully!',
+            });
+
+            button.html('Save')
+            $('#addAlbumModal').modal('hide')
+            $('.modal-backdrop').remove();
+            $('#album-add-form')[0].reset();
+
+        },
+        error: function(e) {
+            iziToast.error({
+                title: 'Error',
+                message: 'An error occured saving the data',
+            });
+            button.html('Save')
+        }
+    })
+    
+})
