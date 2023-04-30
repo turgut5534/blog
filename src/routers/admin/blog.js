@@ -33,7 +33,11 @@ router.get('/', auth, async(req,res) => {
 
     try {
         
-        const blogs = await Post.findAll()
+        const blogs = await Post.findAll( {
+            where: {
+                authorId : req.user.id
+            }
+        })
         res.render('admin/views/blog/blogs', {blogs})
 
     } catch(e) {
