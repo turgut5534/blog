@@ -11,10 +11,10 @@ const compressImage = async (req, res, next) => {
           const fileExt = path.extname(filePath);
           const compressedFilePath = filePath.replace(fileExt, '_compressed.jpg');
   
-          const compressedImage = await sharp(filePath)
+          await sharp(filePath)
             .resize({ width: 800 })
             .withMetadata() 
-            .jpeg({ quality: 100 })
+            .jpeg({ quality: 80 })
             .toFile(compressedFilePath);
   
           // Remove the original file from disk

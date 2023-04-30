@@ -2331,12 +2331,12 @@
   
   .featured-slider .slick-prev {
     left: -120px;
-    background-image: url(../images/icons/icon-arrow-left.svg);
+    background-image: url(/img/arrow-left.svg);
   }
   
   .featured-slider .slick-next {
     right: -120px;
-    background-image: url(../images/icons/icon-arrow-right.svg);
+    background-image: url(/img/arrow-right.svg);
   }
   
   .featured__slide {
@@ -3177,7 +3177,7 @@
     width: 6rem;
     line-height: 6rem;
     text-align: center;
-    background-image: url(../images/icons/icon-arrow-up.svg);
+    background-image: url(/img/arrow.svg);
     background-color: #000000;
     background-repeat: no-repeat;
     background-position: center center;
