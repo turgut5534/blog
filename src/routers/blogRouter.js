@@ -224,12 +224,17 @@ router.get('/blogs/:slug', async(req,res) => {
             where: {
               id: {
                 [Op.gt]: blog.id
-              }
+              },
+              is_active : 1
             }
           });
 
         if(!nextPost) {
             nextPost = await Post.findOne({
+                where: {
+                    is_active: 1
+                }
+            },{
                 order: [['createdAt', 'ASC']]
               });
         }
@@ -238,12 +243,17 @@ router.get('/blogs/:slug', async(req,res) => {
             where: {
               id: {
                 [Op.lt]: blog.id
-              }
+              },
+              is_active : 1
             }
           });
 
         if(!previousPost) {
             previousPost = await Post.findOne({
+                where: {
+                    is_active: 1
+                }
+            },{
                 order: [['createdAt', 'DESC']]
               });
         }

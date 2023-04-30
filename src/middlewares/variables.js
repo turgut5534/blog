@@ -14,7 +14,7 @@ const addVariable = async(req,res,next) => {
             res.locals.myData = cachedData
         } else {
     
-            const categories = await Category.findAll()
+            const categories = await Category.findAll({limit:4})
     
             res.locals.myData = categories
     
