@@ -138,6 +138,9 @@ router.delete('/delete/:id', async(req,res) => {
             return res.status(400).send()
         }
 
+        if(user.is_primary == 1) {
+            return res.status(400).send()
+        }
         if(user.image) {
             try{
                 const path = uploadDirectory + '/users/' + user.image

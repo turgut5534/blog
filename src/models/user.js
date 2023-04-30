@@ -26,6 +26,9 @@ const User = sequelize.define('user', {
     },
     website: {
       type: Sequelize.STRING
+    },
+    is_primary: {
+      type: Sequelize.BOOLEAN
     }
   });
 
