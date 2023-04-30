@@ -22,11 +22,12 @@
 
                         <% if(albumPhotos.length) { %>
                             <% albumPhotos.forEach((album)=> { %>
-                                <div class="col-md-3 mb-4 album-<%= album.id %>">
+                                <div class="col-md-3 mb-4 album-<%= album.photo.id %>">
                                     <a href="javascript:;">
                                         <div class="card">
                                             <img style="background-color: #cfcccc;object-fit: contain; height: 400px;" src="/gallery/<%= album.photo.filename %>" class="card-img-top"
                                                 alt="...">
+                                                <a href="jaavscript:;" data-href="/admin/gallery/photo/delete/<%= album.photo.id %>" data-id="<%= album.photo.id %>" data-data="album" data-title="<%= album.photo.filename %>" type="button" class="remove-image-btn delete-data" style="position: absolute; top: 5px; right: 5px;" >X</a>
                                             <div class="card-body">
                                                 <h5 class="card-title text-center text-dark">
                                                     <%= album.photo.filename %>

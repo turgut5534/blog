@@ -101,6 +101,45 @@ router.delete('/delete/:id' , async(req,res) => {
 
 })
 
+router.delete('/photo/delete/:id' , async(req,res) => {
+
+    try {
+
+        const photo = await Photo.findByPk(req.params.id)
+        
+        if(!photo) {
+            return res.status(400).send()
+        }
+
+        try {
+
+            const path = uploadDirectory + '/gallery/' + photo.filename
+            await fs.promises.unlink(path)
+
+        } catch(e) {
+            console.log(e)
+        }
+
+        const albumPhoto = await AlbumPhoto.findOne({
+            where: {
+                photoId: photo.id
+            }
+        })
+
+        await albumPhoto.destroy()
+
+        await photo.destroy()
+
+        res.status(200).send()
+
+
+    } catch(e) {
+        console.log(e)
+        res.status(500).send(e)
+    }
+
+})
+
 router.get('/:slug/add', async(req,res) => {
 
     try {
