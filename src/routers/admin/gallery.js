@@ -6,6 +6,7 @@ const slugify = require('slugify')
 const AlbumPhoto = require('../../models/albumPhoto')
 const Photo = require('../../models/photo')
 const croppedImage = require('../../middlewares/compressImages')
+const croppedImageArray = require('../../middlewares/compressImagesForMultiple')
 const multer = require('multer')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid')
@@ -179,7 +180,7 @@ router.post('/album/add', async(req,res) => {
 
 })
 
-router.post('/photo/save', upload.array('image'), croppedImage, async(req,res) => {
+router.post('/photo/save', upload.array('image'), croppedImageArray, async(req,res) => {
 
     try {
 

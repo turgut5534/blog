@@ -22,7 +22,7 @@
                         <% admins.forEach((admin)=> { %>
                             <div class="col-md-6 mb-4 admin-<%= admin.id %>">
                                 <div class="card">
-                                    <img src="/users/<%= admin.image %>" class="card-img-top" alt="<%= admin.title %>">
+                                    <img style="height: 400px; object-fit: contain; margin-top: 40px;" src="/users/<%= admin.image %>" class="card-img-top" alt="<%= admin.title %>">
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             <%= admin.name %>
