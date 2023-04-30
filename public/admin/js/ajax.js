@@ -419,3 +419,49 @@ $('body').on('submit','#album-add-form', function(e) {
     })
     
 })
+
+$('.remove-album').on('click', function(e) {
+
+    e.preventDefault()
+
+    const id = $(this).data('id')
+    const title = $(this).data('title')
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "'" +title+ "'"+ " gallery will be deleted",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+          
+          $.ajax({
+              type: 'delete',
+              url: '/admin/gallery/delete/'+ id,
+              data: {id},
+              success: function(data) {
+      
+                  $('.status-'+id).html(data.text)
+      
+                  iziToast.success({
+                      title: 'OK',
+                      message: 'Status succcessfully changed!',
+                  })
+      
+              },
+              error: function(e) {
+                  iziToast.error({
+                      title: 'Error',
+                      message: 'An error occured changing the status',
+                  })
+              }
+          })
+
+      }
+    })
+
+  })

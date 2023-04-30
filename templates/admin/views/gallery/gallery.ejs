@@ -26,8 +26,14 @@
                                 <div class="col-md-3 mb-4 album-<%= album.id %>">
                                     <a href="/admin/gallery/<%= album.slug %>">
                                         <div class="card">
-                                            <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
+                                            <% if (album.album_photos.length) { %>
+                                                <img style="height:400px; object-fit: contain;margin-top: 20px;" src="/gallery/<%= album.album_photos[0].photo.filename %>" class="card-img-top"
+                                                    alt="...">
+                                                <button data-id="<%= album.id %>" data-title="<%= album.name %>" type="button" class="remove-image-btn remove-album" style="position: absolute; top: 5px; right: 5px;" >X</button>
+                                            <% } else {%>
+                                                <img style="height:400px; object-fit: contain; margin-top: 20px;" src="/img/nophoto.png" class="card-img-top"
                                                 alt="...">
+                                            <% } %>
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">
                                                     <%= album.name %>
@@ -36,10 +42,10 @@
                                         </div>
                                     </a>
                                 </div>
-                                <% }) %>
-                                    <% }else { %>
-                                        <p>No album</p>
-                                        <% } %>
+                            <% }) %>
+                        <% }else { %>
+                            <p>No album</p>
+                        <% } %>
                     </div>
                 </div>
             </main>

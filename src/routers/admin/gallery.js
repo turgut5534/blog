@@ -32,12 +32,70 @@ router.get('/', async(req,res) => {
 
     try {
 
-        const albums = await Album.findAll()
+        const albums = await Album.findAll({
+            include : [
+                { model: AlbumPhoto, include: [
+                    {model: Photo}
+                ]}
+            ]
+        })
 
         res.render('admin/views/gallery/gallery', {albums})
 
     } catch(e) {
         console.log(e)
+    }
+
+})
+
+router.delete('/delete/:id' , async(req,res) => {
+
+    try {
+
+        const album = await Album.findByPk(req.params.id)
+        
+        if(!album) {
+            return res.status(400).send()
+        }
+
+        const albumPhotos = await AlbumPhoto.findAll({
+            where: {
+                albumId: album.id
+            },
+            include : [
+                {model: Photo},
+                {model: Album}
+            ]
+        }) 
+        
+
+        for(const album of albumPhotos) {
+
+            const thePhoto = album.photo
+
+            try {
+
+                const path = uploadDirectory + '/gallery/' + thePhoto.filename
+                await fs.promises.unlink(path)
+
+            } catch(e) {
+                console.log(e)
+            }
+            
+            await thePhoto.destroy()
+
+            await album.destroy()
+
+        }
+
+        await album.destroy()
+
+        res.status(200).send()
+
+
+    } catch(e) {
+        console.log(e)
+        res.status(500).send(e)
     }
 
 })

@@ -11,11 +11,11 @@
                                     <div class="item-entry__thumb">
                                         <% if (album.album_photos.length) { %>
                                         <a href="/gallery/<%= album.slug %>" class="item-entry__thumb-link">
-                                            <img src="/gallery/<%= album.album_photos[0].photo.filename %>" alt="">
+                                            <img style="height: 400px; object-fit: contain; margin-top: 40px;" src="/gallery/<%= album.album_photos[0].photo.filename %>" alt="">
                                         </a>
                                         <% } else {%>
                                             <a href="/gallery/<%= album.slug %>" class="item-entry__thumb-link">
-                                                <img src="/img/nophoto.png" alt="">
+                                                <img style="height: 400px; object-fit: contain; margin-top: 40px;" src="/img/nophoto.png" alt="">
                                             </a>
                                         <% } %>
                                     </div>

@@ -39,3 +39,22 @@
     padding: 20px;
     border-radius: 15px;
   }
+
+  .remove-image-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px red solid;
+    border-radius: 10px;
+}
+
+.remove-image-btn:hover {
+    color: darkred;
+}
