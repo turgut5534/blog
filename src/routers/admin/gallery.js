@@ -167,7 +167,7 @@ router.post('/album/add', async(req,res) => {
             lower: true,
             strict: true
         })
-        album.UserId = req.user.UserId
+        album.userId = req.user.UserId
 
         await album.save()
 
