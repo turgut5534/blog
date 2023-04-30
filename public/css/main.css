@@ -1633,8 +1633,8 @@
   }
   
   .header__logo img {
-    width: 165px;
-    height: 25px;
+    width: 150px;
+    height: 55px;
   }
   
   /* -------------------------------------------------------------------
@@ -2203,8 +2203,8 @@
   
   @media only screen and (max-width:400px) {
     .header__logo img {
-      width: 140px;
-      height: 21px;
+      width: 150px;
+      height: 55px;
     }
   
     .header__search-form input[type="search"] {
