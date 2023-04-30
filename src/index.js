@@ -11,7 +11,10 @@ const uploadDirectory = path.join(__dirname, '../uploads')
 const blogRouter = require('./routers/blogRouter')
 const adminRouter = require('./routers/adminRouter')
 
+const https = require('./middlewares/https')
 const app = express()
+
+app.use(https)
 
 app.set('view engine', 'ejs')
 app.set('views', viewsDirectory)
