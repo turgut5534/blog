@@ -11,11 +11,13 @@
                                 Users
                             </div>
                         </div>
+                        <% if (user.is_primary == 1 ) { %>
                         <div class="col-6 text-end">
                             <a class="btn btn-success" href="/admin/user/add">
                                 +Add
                             </a>
                         </div>
+                        <% } %>
                     </div>
 
                     <div class="row admins">
@@ -36,12 +38,14 @@
                                           
                                         </small>
                                         <div class="float-end">
+                                            <% if (user.is_primary == 1 || user.id == admin.id) { %>
                                             <a href="/admin/user/edit/<%= admin.id %>"
                                                 class="btn btn-sm btn-outline-secondary me-2">Edit</a>
                                             <button type="button" class="btn btn-sm btn-outline-danger delete-data"
                                                 data-data="admin" data-title="<%= admin.name %>"
                                                 data-id="<%= admin.id %>"
                                                 data-href="/admin/user/delete/<%= admin.id %>">Delete</button>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
