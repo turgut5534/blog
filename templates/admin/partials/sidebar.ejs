@@ -24,9 +24,11 @@
           <a class="sidebar-link" href="/admin/user">
             <i class="fas fa-th"></i> <span class="align-middle">All Users</span>
           </a>
+          <% if (user.is_primary == 1 ) { %>
           <a class="sidebar-link" href="/admin/user/add">
             <i class="fas fa-plus"></i> <span class="align-middle">Add User</span>
           </a>
+          <% } %>
         </div>
       </li>
 
