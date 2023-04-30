@@ -5,22 +5,27 @@
             <div class="row entries-wrap add-top-padding wide">
                 <div class="entries">
                     <% if (albums.length) { %>
-                        <% albums.forEach(() => { %>
+                        <% albums.forEach((album) => { %>
                             <article class="col-block">
                                 <div class="item-entry" data-aos="zoom-in">
                                     <div class="item-entry__thumb">
-                                        <a href="single-standard.html" class="item-entry__thumb-link">
-                                            <img src="images/thumbs/post/lamp-400.jpg" alt="">
+                                        <% if (album.album_photos.length) { %>
+                                        <a href="/gallery/<%= album.slug %>" class="item-entry__thumb-link">
+                                            <img src="/gallery/<%= album.album_photos[0].photo.filename %>" alt="">
                                         </a>
+                                        <% } else {%>
+                                            <a href="/gallery/<%= album.slug %>" class="item-entry__thumb-link">
+                                                <img src="/img/nophoto.png" alt="">
+                                            </a>
+                                        <% } %>
                                     </div>
                                     <div class="item-entry__text">
                                         <div class="item-entry__cat">
-                                            <a href="category.html">Design</a>
+                                           
                                         </div>
-                                        <h1 class="item-entry__title"><a href="single-standard.html">3 Benefits of Minimalism In
-                                                Interior Design.</a></h1>
+                                        <h1 class="item-entry__title"><a href="/gallery/<%= album.slug %>"><%= album.name %></a></h1>
                                         <div class="item-entry__date">
-                                            <a href="single-standard.html">June 15, 2018</a>
+                                            <a href="/gallery/<%= album.slug %>"><%= album.createdAt.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></a>
                                         </div>
                                     </div>
                                 </div>
@@ -31,6 +36,10 @@
                     <% } %>
                 </div>
             </div>
+
+
+
+
             <div class="row pagination-wrap">
                 <div class="col-full">
                   <nav class="pgn" data-aos="fade-up">

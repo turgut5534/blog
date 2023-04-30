@@ -388,12 +388,14 @@ $('body').on('submit','#album-add-form', function(e) {
 
             $('.albums').append(`<div class="col-md-3 mb-4 album-${data.id}">
                 <div class="card">
+                    <a href="/admin/gallery/${data.slug}">
                     <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">${data.name}</h5>
                     </div>
                 </div>
+                </a>
             </div>`)
 
             iziToast.success({

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $('#image-input').on('change', function() {
       var file = $(this)[0].files[0];
       var reader = new FileReader();
@@ -8,6 +9,22 @@ $(document).ready(function() {
       }
       reader.readAsDataURL(file);
     });
+
+    $('#photo-input').on('change', function() {
+      var files = $(this)[0].files;
+      $('.preview-image-box').removeClass('d-none').empty();
+      for (var i = 0; i < files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = (function(file) {
+          return function(e) {
+            $('.preview-image-box').append('<img style="height:200px; width:25%; object-fit: contain;" class="preview-image" src="'+e.target.result+'">');
+          };
+        })(files[i]);
+        reader.readAsDataURL(files[i]);
+      }
+    });
+    
+
   });
 
 

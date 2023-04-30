@@ -1,4 +1,4 @@
-<%- include('../../partials/head' , { title: 'Albums' }) %>
+<%- include('../../partials/head' , { title: 'Photos' }) %>
     <%- include('../../partials/sidebar') %>
         <%- include('../../partials/header') %>
 
@@ -8,37 +8,37 @@
                     <div class="row align-items-center mb-3">
                         <div class="col-6">
                             <div class="h2">
-                                Albums
+                                Photos of <span class="text-primary"><%= album.name %></span>
                             </div>
                         </div>
                         <div class="col-6 text-end">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#addAlbumModal">
+                            <a class="btn btn-success" href="/admin/gallery/<%= album.slug %>/add">
                                 +Add
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                     <div class="row albums">
 
-                        <% if(albums.length) { %>
-                            <% albums.forEach((album)=> { %>
+                        <% if(albumPhotos.length) { %>
+                            <% albumPhotos.forEach((album)=> { %>
                                 <div class="col-md-3 mb-4 album-<%= album.id %>">
-                                    <a href="/admin/gallery/<%= album.slug %>">
+                                    <a href="javascript:;">
                                         <div class="card">
-                                            <img src="https://source.unsplash.com/random/500x500" class="card-img-top"
+                                            <img style="background-color: #cfcccc;object-fit: contain; height: 400px;" src="/gallery/<%= album.photo.filename %>" class="card-img-top"
                                                 alt="...">
                                             <div class="card-body">
-                                                <h5 class="card-title text-center">
-                                                    <%= album.name %>
+                                                <h5 class="card-title text-center text-dark">
+                                                    <%= album.photo.filename %>
                                                 </h5>
                                             </div>
                                         </div>
+
                                     </a>
                                 </div>
                                 <% }) %>
                                     <% }else { %>
-                                        <p>No album</p>
+                                        <p>No photos in <span class="text-primary"><%= album.name %></span> album</p>
                                         <% } %>
                     </div>
                 </div>

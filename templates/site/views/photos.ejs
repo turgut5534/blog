@@ -1,1 +1,36 @@
-<h1>Hey</h1>
+<%- include('../partials/head' , { title: 'Photos' }) %>
+    <%- include('../partials/header') %>
+
+
+        <section class="s-content s-content--top-padding">
+            <div class="row entries-wrap add-top-padding wide">
+                <div class="entries">
+                    <% if (albumPhotos.length) { %>
+                        <% albumPhotos.forEach((album) => { %>
+                            <article class="col-block">
+                                <div class="item-entry" data-aos="zoom-in">
+                                    <div class="item-entry__thumb">
+                                        <a data-fancybox="gallery" data-gallery="photos" href="/gallery/<%= album.photo.filename %>" class="item-entry__thumb-link">
+                                            <img src="/gallery/<%= album.photo.filename %>" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="item-entry__text">
+                                        <div class="item-entry__cat">
+                                           
+                                        </div>
+                                        <h1 class="item-entry__title"><a href="/gallery/<%= album.slug %>"><%= album.photo.name %></a></h1>
+                                        <div class="item-entry__date">
+                                            <a href="/gallery/<%= album.slug %>"><%= album.photo.createdAt.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }) %>
+                    <% } else { %>
+                            <p>No photo in this album</p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+
+        <%- include('../partials/footer') %></h1>
